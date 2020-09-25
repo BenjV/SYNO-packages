@@ -13,16 +13,17 @@ print(f'{"Cpu count":<20}: {os.cpu_count()}')
 Info = platform.uname()
 for Index in range(0, len(Info)):
     print(f'{Info._fields[Index]:<20}: {Info[Index]}')
-try:
-    print(f'{"Wan Ip adress":<20}: {request.urlopen("https://api.ipify.org:443").read().decode("utf-8")}')
-except Exception as Error:
-    print(Error, file=sys.stderr)
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.connect(("8.8.8.8", 80))
-print(f'{"Lan Ip adress":<20}: {sock.getsockname()[0]}')
+#try:
+#    print(f'{"Wan Ip adress":<20}: {request.urlopen("https://api.ipify.org:443").read().decode("utf-8")}')
+#except Exception as Error:
+#    print(Error, file=sys.stderr)
+#
+#sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+#sock.connect(("8.8.8.8", 80))
+#print(f'{"Lan Ip adress":<20}: {sock.getsockname()[0]}')
 
 print('\nCertificate search path:')
+print()
 try:
     CertPath = ssl.get_default_verify_paths()
     for Index in range(0, len(CertPath)):
@@ -40,7 +41,7 @@ try:
             print ("Available cyphers:\n")
             for Cypher in Value:
                 print(Cypher)
-            print('\nOther ssl info:')
+            print('\nOther ssl info:\n')
         elif Key =='insecure_cipher_suites':
             for Key, Value in Resp['insecure_cipher_suites']:
                 Print(f'{Key}: {Value}')
