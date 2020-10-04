@@ -1,18 +1,22 @@
-import socket, ssl, sys, os, platform, json
+import socket, ssl, sys, os, platform, json, re
 from urllib import request
+
 print('\nPlatform information:')
 
 try:
     with open('/etc.defaults/synoinfo.conf', 'r') as fp:
-        SynoInfo = fp.readline().split('"')[1].replace('_',' ')
-        print(f'{"System"}:<20: {SynoInfo}')
+        info = fp.read()
+        re_info=re.compile('^unique="(.*)"', re.MULTILINE)
+        SynoInfo = re_info.search(info).group(1).replace('_',' ')
+        print(f'{"System":<20}: {SynoInfo}')
 except:
-    print(f'{"System"}:<20: {"No Synology Device"}')
+    print(f'{"System":<20}: {"No Synology Device"}')
 print(f'{"Cpu count":<20}: {os.cpu_count()}')
 
 Info = platform.uname()
 for Index in range(0, len(Info)):
     print(f'{Info._fields[Index]:<20}: {Info[Index]}')
+
 #try:
 #    print(f'{"Wan Ip adress":<20}: {request.urlopen("https://api.ipify.org:443").read().decode("utf-8")}')
 #except Exception as Error:
@@ -50,8 +54,9 @@ try:
 except Exception as Error:
     print(Error, file=sys.stderr)
 print()
+
 #Make a soccket connection with diferent website who specific tls versions and encryptions
-print('Testing sites support only certen TLS versions.')
+print('Testing sites support only certain TLS versions.')
 TestSites = [
              ('tls-v1-0.badssl.com', 1010),
              ('tls-v1-1.badssl.com', 1011),
