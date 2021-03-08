@@ -7,4 +7,5 @@ https://github.com/pymedusa/Medusa
 https://github.com/SickChill/SickChill  
 
 During installation they do a git fetch from those githubs.  
-Both packages needs Git and Python3 from the SynoCommunity to work.
+Both packages needs Git and Python3.  
+Python3 can be from the SynoCommunity(3 or 3.8) or from Synology 
