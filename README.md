@@ -1,5 +1,5 @@
 # SYNO-packages
-The SickChill and Medusa packages are just wrappers around the official package from their githubs.
+The SickChill and Medusa packages are just wrappers around the official package from their githubs.  
 So these are not different applications but just all the stuf needed to make Synology package for them.  
 
 The sources are:  
