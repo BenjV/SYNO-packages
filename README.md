@@ -9,5 +9,9 @@ https://github.com/SickChill/SickChill
 During installation they do a git fetch from those githubs.  
 So you alway get the latest version.  
 Updating these applications can be done from within the application itself.  
+
 Both packages needs Git and Python3.  
 Python3 can be from the SynoCommunity(3 or 3.8) or from Synology 
+  
+Because of the way DSM is designed, used ports are fixed during package installation.  
+So changing the port whithin the application will not function.
