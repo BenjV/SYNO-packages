@@ -15,3 +15,6 @@ Python3 can be from the SynoCommunity(3 or 3.8) or from Synology
   
 Because of the way DSM is designed, used ports are fixed during package installation.  
 So changing the port whithin the application will not function.
+
+This package is not an upgrade of an old (python 2) package.  
+So make a backup from within SickChill or Medusa first and restore it after the new installation.
