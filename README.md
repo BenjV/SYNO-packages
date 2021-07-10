@@ -11,10 +11,14 @@ So you alway get the latest version.
 Updating these applications can be done from within the application itself.  
 
 Both packages needs Git and Python3.  
-Python3 can be from the SynoCommunity(3 or 3.8) or from Synology 
+Python3 can be from the SynoCommunity or from Synology 
   
 Because of the way DSM is designed, used ports are fixed during package installation.  
 So changing the port whithin the application will not function.
 
 This package is not an upgrade of an old (python 2) package.  
 So make a backup from within SickChill or Medusa first and restore it after the new installation.
+
+Permissions are granted via the "system internal user" sc-medusa/sc-sickchill
+For details see:
+https://github.com/SynoCommunity/spksrc/wiki/Permission-Management
