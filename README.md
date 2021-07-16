@@ -1,5 +1,6 @@
 # SYNO-packages
 DUE TO THE FACT THAT THE SICKCHILL DEVELOPERS HAVE CHOOSEN TO BLOCK THIS PYTHON APPLICATION TO RUN FROM SOURCE, MY PACKAGE DOES NOT RUN ANYMORE.
+
 SO I HAVE REMOVED THEM FROM MY GITHUB.
 
 The medusa package is still able to run from source, so I will keep supporting it for Synology devices both for DSM7 and pre DSM 7.
@@ -10,7 +11,6 @@ During installation or upgrading the source will be cloned from their github.
 
 The sources are:  
 https://github.com/pymedusa/Medusa  
-https://github.com/SickChill/SickChill  
 
 During installation they do a git fetch from those githubs.  
 So you alway get the latest version.  
