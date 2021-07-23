@@ -24,6 +24,7 @@ On the versions for DSM 6 a Python 3 package needs to be installed (either from 
 On the DSM 7 version it will use the SynoCommunity Python3.8 is installed, if not the Python3 which is included in DSM 7. 
 
 The DSM 7 packages can only be installed on DSM 7.0-4000 or later.
+
 The DSM 6 packages cannot be installed on DSM 7
   
 Because of the way DSM is designed, used ports are fixed during package installation.  
