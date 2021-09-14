@@ -18,10 +18,10 @@ So you alway get the latest version.
 Updating these applications can be done from within the application itself.
 So upgrading the package will normally not be needed unless Synology change the package structure again.
 
-Both packages needs Git from the SynoCommunity.
+The packages needs Git from the SynoCommunity.
 The package can use the python 3.8 from the SYnocommunity or the Python 3 from Synology
-On the versions for DSM 6 a Python 3 package needs to be installed (either from Synology or the SynoCommunity.
-On the DSM 7 version it will use the SynoCommunity Python3.8 is installed, if not the Python3 which is included in DSM 7. 
+On the versions for DSM 6 a Python 3 package needs to be installed (either from Synology or the SynoCommunity).
+On the DSM 7 version it will use the SynoCommunity Python3.8 is installed, if not available the Python3 which is included in DSM 7. 
 
 The DSM 7 packages can only be installed on DSM 7.0-4000 or later.
 
@@ -36,9 +36,8 @@ After upgrading to DSM 7 install the DSM 7 version and restore the data.
 If you upgrade to DSM 7 and did not do it this way, the packages will try to recover the database and config.
 No garantee it will succeed.
 
-Permissions to shares where your downloader puts the video's must be granted via the "system internal user" sc-medusa/
+Permissions to shares where your downloader puts the video's must be granted via the "system internal user" sc-medusa.
 If you use postprocessing to copy or move video's the share where you want to put the files must also be given permissions to the same user.
 
-If you have existing folders and files on an existing share, don't forget also to grand prermissions recursively to that user with FileStation.
 For details see:
 https://github.com/SynoCommunity/spksrc/wiki/Permission-Management
