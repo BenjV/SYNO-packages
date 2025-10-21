@@ -8,13 +8,13 @@ case "$1" in
     if [ -x "/var/packages/python312/target/bin/python3.12" ]
     then
       PYTHON="/var/packages/python312/target/bin/python3.12"
-    elseif [ -x "/var/packages/python311/target/bin/python3.11" ]
+    elif [ -x "/var/packages/python311/target/bin/python3.11" ]
     then
       PYTHON="/var/packages/python311/target/bin/python3.11"
-    elseif [ -x "/var/packages/python310/target/bin/python3.10" ]
+    elif [ -x "/var/packages/python310/target/bin/python3.10" ]
     then
       PYTHON="/var/packages/python310/target/bin/python3.10"
-    elseif [ -x "/var/packages/python39/target/bin/python3.9" ]
+    elif [ -x "/var/packages/python39/target/bin/python3.9" ]
     then
       PYTHON="/var/packages/python39/target/bin/python3.9"
     else
