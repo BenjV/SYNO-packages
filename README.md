@@ -22,6 +22,7 @@ The packages needs Git from the SynoCommunity.
 The package can use the python 3.8 from the SYnocommunity or the Python 3 from Synology
 On the versions for DSM 6 a Python 3 package needs to be installed (either from Synology or the SynoCommunity).
 On the DSM 7 version it will use the SynoCommunity Python3.8 is installed, if not available the Python3 which is included in DSM 7. 
+There is a new version 2.4 that will use Python3.9 to 3.12 from the synocommunity or python 3.9 from Synology.
 
 The DSM 7 packages can only be installed on DSM 7.0-4000 or later.
 
