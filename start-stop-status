@@ -1,0 +1,119 @@
+#!/bin/sh
+PIDFILE="${SYNOPKG_PKGVAR}/${SYNOPKG_PKGNAME}.pid"
+STARTMODULE="${SYNOPKG_PKGDEST}/src/start.py"
+TIMEOUT=30 # Time to wait for the application to create a pidfile
+case "$1" in
+  start)
+    # if python3 of the SynoCommunity is available use that else use the one from Synology
+    if [ -x "/var/packages/python312/target/bin/python3.12" ]
+    then
+      PYTHON="/var/packages/python312/target/bin/python3.12"
+    elseif [ -x "/var/packages/python311/target/bin/python3.11" ]
+    then
+      PYTHON="/var/packages/python311/target/bin/python3.11"
+    elseif [ -x "/var/packages/python310/target/bin/python3.10" ]
+    then
+      PYTHON="/var/packages/python310/target/bin/python3.10"
+    elseif [ -x "/var/packages/python39/target/bin/python3.9" ]
+    then
+      PYTHON="/var/packages/python39/target/bin/python3.9"
+    else
+      PYTHON="python3.9"
+    fi
+    cd "${SYNOPKG_PKGDEST}"
+    if [ -e "${PIDFILE}" ]
+    then
+      read PID < "${PIDFILE}"
+      if ! kill -0 $PID
+      then
+        echo "pidfile present but no process, removing pidfile before starting ${SYNOPKG_PKGNAME}"
+        unlink "${PIDFILE}"
+      fi
+    fi
+    # Make sure the port number does not change in the config of medusa
+    sed -i "/\<web_port/s/=.*/= ${SYNOPKG_PKGPORT}/" "${SYNOPKG_PKGVAR}/config.ini"
+    if ! env LANG=en_US.UTF-8 "${PYTHON}" "${STARTMODULE}" -q --daemon --pidfile="${PIDFILE}" --datadir="${SYNOPKG_PKGVAR}" --port=${SYNOPKG_PKGPORT}
+    then
+      printf "Package would not start! See: /var/log/packages/%s.log" "${SYNOPKG_PKGNAME}" > "${SYNOPKG_TEMP_LOGFILE}"
+      exit 3
+    fi
+    # Wait for a pidfile to appear
+    COUNT=0
+    while [ ! -e "${PIDFILE}" ]
+    do
+      COUNT=$((COUNT+1))
+      # If we waited too long we assume the package will not start
+      if [ $COUNT -gt $TIMEOUT ]
+      then
+        printf "Package did not start within % seconds" "${TIMEOUT}" > "$SYNOPKG_TEMP_LOGFILE"
+        exit 3
+      fi
+      sleep 1
+    done
+    # Read the pid from the pidfile
+    read PID 2> /dev/null < "${PIDFILE}"
+    # check if the there is a process with that pid running
+    if kill -0 $PID 2> /dev/null
+    then
+      exit 0
+    else
+      echo "Package created a pidfile but crashed." > "$SYNOPKG_TEMP_LOGFILE"
+      unlink "${PIDFILE}"
+      exit 0
+    fi
+    exit 0
+  ;;
+  stop)
+    # if there is a pidfile get the pid from it else check if the process is not running and if not remove the pidfile
+    if [ -e "${PIDFILE}" ]
+    then
+      read PID < "${PIDFILE}"
+      if ! kill -0 $PID
+      then
+        echo "Pidfile present, but process not, so remove pidfile"
+          # pidfile is there but process not, so remove pidfile
+        unlink "${PIDFILE}"
+        exit 0
+      fi
+    else
+      echo "No pidfile, so process is not running"
+      exit 0
+    fi
+    echo "Send Term signal to package"
+    echo "Send Term signal to package" > "$SYNOPKG_TEMP_LOGFILE"
+    # Send a "Term" signal to the process to let it  gracefully shutdown
+    kill -15 $PID 2> /dev/null
+    # wait until the pidfile is gone
+    COUNT=0
+    while [ -e  "${PIDFILE}" ]
+    do
+      COUNT=$((COUNT+1))
+      # If it takes to long to shutdown the program, we force it down.
+      if [ $COUNT -gt $TIMEOUT ]
+      then
+        echo "It took too long to gracefull terminate, so we kill the process"
+        kill -9 $PID 2> /dev/null
+        unlink "${PIDFILE}"
+        exit 0
+      fi
+      sleep 1
+    done
+    exit 0
+  ;;
+  status)
+    read PID  2> /dev/null < "${PIDFILE}"
+    if [ -z $PID ]
+    then
+      exit 3
+    else
+      if kill -0 $PID
+      then
+        exit 0
+      else
+        unlink "${PIDFILE}" 2> /dev/null
+        exit 3
+      fi
+    fi
+  ;;
+esac
+exit 0
