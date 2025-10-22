@@ -3,6 +3,9 @@ DUE TO THE FACT THAT THE SICKCHILL DEVELOPERS HAVE CHOOSEN TO BLOCK THIS PYTHON 
 
 SO I HAVE REMOVED THEM FROM MY GITHUB.
 
+The latest version of mmedusa only run on Python version 3.9 to 3.133 so not on lower or igher Python versions.
+So to be able to install or upgrade medusa you need one of those Python versions from the Synocommunity or Python 3.9 from SSYnology.
+Als you need teh new mesdusa packager version 2.4 from here.
 
 The medusa package is still able to run from source, so I will keep supporting it for Synology devices both for DSM7 and pre DSM 7.
 
